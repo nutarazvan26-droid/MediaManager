@@ -1,1 +1,0 @@
-Not a media file. The scanner must ignore it.

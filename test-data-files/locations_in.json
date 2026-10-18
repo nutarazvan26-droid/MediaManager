@@ -2,26 +2,26 @@
   {
     "id": 1,
     "name": "Muzica",
-    "path": "test-data/music"
+    "path": "music"
   },
   {
     "id": 2,
     "name": "Poze",
-    "path": "test-data/photos"
+    "path": "photos"
   },
   {
     "id": 3,
     "name": "Mixt",
-    "path": "test-data/mixed"
+    "path": "mixed"
   },
   {
     "id": 4,
     "name": "Video",
-    "path": "test-data/video"
+    "path": "video"
   },
   {
     "id": 5,
     "name": "Gol",
-    "path": "test-data/empty-folder"
+    "path": "empty-folder"
   }
 ]
