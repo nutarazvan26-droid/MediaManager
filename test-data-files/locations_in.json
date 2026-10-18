@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Muzica",
+    "path": "test-data/music"
+  },
+  {
+    "id": 2,
+    "name": "Poze",
+    "path": "test-data/photos"
+  },
+  {
+    "id": 3,
+    "name": "Mixt",
+    "path": "test-data/mixed"
+  },
+  {
+    "id": 4,
+    "name": "Video",
+    "path": "test-data/video"
+  },
+  {
+    "id": 5,
+    "name": "Gol",
+    "path": "test-data/empty-folder"
+  }
+]

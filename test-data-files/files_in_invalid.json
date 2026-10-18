@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "locationId": 1,
+    "name": "notes.txt",
+    "extension": "txt",
+    "type": "AUDIO",
+    "sizeBytes": 47,
+    "lastModified": "21.07.2025 10:30",
+    "path": "test-data/music/notes.txt"
+  },
+  {
+    "id": 2,
+    "locationId": 1,
+    "name": "minus.mp3",
+    "extension": "mp3",
+    "type": "AUDIO",
+    "sizeBytes": -5,
+    "lastModified": "21.07.2025 10:30",
+    "path": "test-data/music/minus.mp3"
+  },
+  {
+    "id": 3,
+    "locationId": 9,
+    "name": "fara_locatie.png",
+    "extension": "png",
+    "type": "IMAGE",
+    "sizeBytes": 100,
+    "lastModified": "21.07.2025 10:30",
+    "path": "test-data/photos/fara_locatie.png"
+  },
+  {
+    "id": 4,
+    "locationId": 2,
+    "name": "tip_gresit.jpg",
+    "extension": "jpg",
+    "type": "VIDEO",
+    "sizeBytes": 100,
+    "lastModified": "21.07.2025 10:30",
+    "path": "test-data/photos/tip_gresit.jpg"
+  },
+  {
+    "id": 5,
+    "locationId": 2,
+    "name": "data_gresita.png",
+    "extension": "png",
+    "type": "IMAGE",
+    "sizeBytes": 100,
+    "lastModified": "31-02-2025",
+    "path": "test-data/photos/data_gresita.png"
+  }
+]
