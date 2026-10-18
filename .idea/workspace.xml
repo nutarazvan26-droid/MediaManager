@@ -1,51 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/files/BaseFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/files/IFileMethods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/files/JsonFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/files/MyFiles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/files/MyLocationsFile.java" afterDir="false" />
+    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="parse files 1">
+      <change afterPath="$PROJECT_DIR$/src/model/files/CommonFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/files/MyFilesIn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/files/MyLocationsInFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MediaManager/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/exceptions/ResourceNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/exceptions/ResourceNotFoundException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/i18n/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/i18n/Messages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data-files/locations_in.json" beforeDir="false" afterPath="$PROJECT_DIR$/test-data-files/locations_in.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/mixed/archive.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/mixed/doc.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/mixed/picture.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/mixed/song.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/Alarm01.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/Ring01.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/UPPERCASE.MP3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/albums/2026/cover.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/albums/2026/track01.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/empty.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/MyFilesHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/notes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/playlist.m3u" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/silence_10s.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/silence_2s.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/sweep_5s.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/tone_440hz_1s.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/music/tone_880hz_3s_stereo.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/chart_gray.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/gradient_320x240.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/imagine_școală.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/img100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/logo_transparent.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/noise_1280x720.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/palette_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/photo.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/text_1920x1080.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/thumb_hidden.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/vacation/beach.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/vacation/nested/deep.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/photos/vacation/sunset.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-data/video/clip.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/MyFilesHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/BaseFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/BaseFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/MyFiles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/MyLocationsFile.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,6 +72,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="model.files" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\master\ppoo sem 1\proiect\MediaManager\src\model\files" />
     </key>
@@ -157,6 +126,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="parse files 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="parse files 1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
