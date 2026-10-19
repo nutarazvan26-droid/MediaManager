@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="parse files 1">
-      <change afterPath="$PROJECT_DIR$/src/model/files/CommonFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/files/MyFilesIn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/files/MyLocationsInFile.java" afterDir="false" />
+    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="parse input files, save in hashmap and print">
+      <change afterPath="$PROJECT_DIR$/src/model/files/common/ICommonFileModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/InputScanner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MediaManager/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/MyFilesHolder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/BaseFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/BaseFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/MyFiles.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/MyLocationsFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/BaseFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/BaseFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/CommonFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/CommonFileModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/IFileMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/IFileMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/JsonFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/JsonFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/LocationModels/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/locationModels/LocationModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/LocationModels/MyLocationsInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/locationModels/MyLocationsHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/MediaFiles/MyFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFileModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/MediaFiles/MyFilesIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFilesHolder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +25,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
+        <option value="package-info" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -53,30 +58,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/master/ppoo sem 1/proiect/MediaManager/src/model/files",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "editor.preferences.import"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/master/ppoo sem 1/proiect/MediaManager/src/model/files&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="model.files" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\master\ppoo sem 1\proiect\MediaManager\src\model\files" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="model.files.common" />
     </key>
   </component>
   <component name="RunManager">
@@ -129,7 +139,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="parse files 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="parse files 1" />
+    <MESSAGE value="parse input files, save in hashmap and print" />
+    <option name="LAST_COMMIT_MESSAGE" value="parse input files, save in hashmap and print" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,13 +1,13 @@
-package model.files.LocationModels;
+package model.files.locationModels;
 
-import model.files.CommonFile;
+import model.files.common.CommonFileModel;
 
 import java.util.Objects;
 
-public class Location extends CommonFile {
+public class LocationModel extends CommonFileModel {
     private LocationType locationType;
 
-    public Location(int id, String name, String path, LocationType locationType) {
+    public LocationModel(int id, String name, String path, LocationType locationType) {
         super(id, name, path);
         this.locationType = locationType;
     }
@@ -20,10 +20,10 @@ public class Location extends CommonFile {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Location)) return false;
+        if (!(o instanceof LocationModel)) return false;
         if (!super.equals(o)) return false;
-        Location location = (Location) o;
-        return locationType == location.locationType;
+        LocationModel locationModel = (LocationModel) o;
+        return locationType == locationModel.locationType;
     }
 
     @Override

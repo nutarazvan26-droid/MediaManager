@@ -1,11 +1,11 @@
-package model.files.MediaFiles;
+package model.files.mediaFiles;
 
-import model.files.CommonFile;
+import model.files.common.CommonFileModel;
 
 import java.util.Date;
 import java.util.Objects;
 
-public class MyFile extends CommonFile {
+public class MyFileModel extends CommonFileModel {
     private int locationId;
     private String extension;
     private String type;
@@ -14,9 +14,9 @@ public class MyFile extends CommonFile {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof MyFile)) return false;
+        if (!(o instanceof MyFileModel)) return false;
         if (!super.equals(o)) return false;
-        MyFile myFile = (MyFile) o;
+        MyFileModel myFile = (MyFileModel) o;
         return locationId == myFile.locationId && sizeBytes == myFile.sizeBytes && Objects.equals(extension, myFile.extension) && Objects.equals(type, myFile.type) && Objects.equals(lastModified, myFile.lastModified);
     }
 
@@ -65,7 +65,7 @@ public class MyFile extends CommonFile {
         this.lastModified = lastModified;
     }
 
-    public MyFile(int id, String name, String path, int locationId, String extension, String type, long sizeBytes, Date lastModified) {
+    public MyFileModel(int id, String name, String path, int locationId, String extension, String type, long sizeBytes, Date lastModified) {
         super(id, name, path);
         this.locationId = locationId;
         this.extension = extension;
