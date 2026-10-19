@@ -12,6 +12,15 @@ public class MyFileModel extends CommonFileModel {
     private long sizeBytes;
     private Date lastModified;
 
+    public MyFileModel(int id, String name, String path, int locationId, String extension, String type, long sizeBytes, Date lastModified) {
+        super(id, name, path);
+        this.locationId = locationId;
+        this.extension = extension;
+        this.type = type;
+        this.sizeBytes = sizeBytes;
+        this.lastModified = lastModified;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof MyFileModel)) return false;
@@ -62,15 +71,6 @@ public class MyFileModel extends CommonFileModel {
     }
 
     public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public MyFileModel(int id, String name, String path, int locationId, String extension, String type, long sizeBytes, Date lastModified) {
-        super(id, name, path);
-        this.locationId = locationId;
-        this.extension = extension;
-        this.type = type;
-        this.sizeBytes = sizeBytes;
         this.lastModified = lastModified;
     }
 

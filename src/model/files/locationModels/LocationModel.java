@@ -11,9 +11,11 @@ public class LocationModel extends CommonFileModel {
         super(id, name, path);
         this.locationType = locationType;
     }
+
     public LocationType getLocationType() {
         return locationType;
     }
+
     public void setLocationType(LocationType locationType) {
         this.locationType = locationType;
     }

@@ -4,36 +4,39 @@ import model.files.common.JsonFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 /**
  * This is my files holder singleton implementation for holding the single ref point to files_in.json,
  * and it's also used to parse and return the file objects from the file.
+ *
  * @author RazvanNuta
- * @since 2026.10.18
  * @version 2
  * @see JsonFile
  * @see MyFileModel
+ * @since 2026.10.18
  */
 public final class MyFilesHolder extends JsonFile<MyFileModel> {
     private static final String FILES_IN_LOCATION = "test-data-files\\files_in.json";
     private static final String FILES_OUT_LOCATION = "test-data-files\\files_out.json";
-    private  final String FILES_IN_INVALID_EXAMPLE_LOCATION = "test-data-files\\files_in_invalid_example.json";
-
     private static MyFilesHolder instance;
+    private final String FILES_IN_INVALID_EXAMPLE_LOCATION = "test-data-files\\files_in_invalid_example.json";
 
     private MyFilesHolder(String inputFileName, String outputFileName) throws FileNotFoundException {
         super(inputFileName, outputFileName);
     }
 
 
-    public static MyFilesHolder GetInstance(){
-        if(instance == null){
+    public static MyFilesHolder GetInstance() {
+        if (instance == null) {
             try {
-                instance = new MyFilesHolder(MyFilesHolder.FILES_IN_LOCATION,  MyFilesHolder.FILES_OUT_LOCATION);
+                instance = new MyFilesHolder(MyFilesHolder.FILES_IN_LOCATION, MyFilesHolder.FILES_OUT_LOCATION);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -42,14 +45,14 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
     }
 
     @Override
-    protected List<MyFileModel> parseJSON(String jsonStr){
+    protected List<MyFileModel> parseJSON(String jsonStr) {
         List<MyFileModel> myFileList = new ArrayList<>();
 
         JSONArray array = new JSONArray(jsonStr);
-        for (int i = 0; i < array.length(); i++){
+        for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
             int id = obj.getInt("id");
-            int  locationId = obj.getInt("locationId");
+            int locationId = obj.getInt("locationId");
             String name = obj.getString("name");
             String extension = obj.getString("extension");
             String type = obj.getString("type");
@@ -64,16 +67,16 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
             }
             String path = obj.getString("path");
 
-            MyFileModel mf = new MyFileModel(id, name, path, locationId, extension, type, sizeBytes, lastModified );
+            MyFileModel mf = new MyFileModel(id, name, path, locationId, extension, type, sizeBytes, lastModified);
             myFileList.add(mf);
         }
         return myFileList;
     }
 
     @Override
-    protected String toJSON(Collection<MyFileModel> myFileList){
+    protected String toJSON(Collection<MyFileModel> myFileList) {
         JSONArray array = new JSONArray();
-        for (MyFileModel mf : myFileList){
+        for (MyFileModel mf : myFileList) {
             JSONObject obj = new JSONObject();
             obj.put("id", mf.getId());
             obj.put("locationId", mf.getLocationId());

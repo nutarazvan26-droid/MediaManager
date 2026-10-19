@@ -1,25 +1,15 @@
 package model.files.common;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 public abstract class BaseFile<T> implements IFileMethods<T> {
 
-    private String inputFileName;
-    private String outputFileName;
+    private final String inputFileName;
+    private final String outputFileName;
     private File inputFile;
     private File outputFile;
-
-    public String getInputFileName() {
-        return inputFileName;
-    }
-
-    public String getOutputFileName() {
-        return outputFileName;
-    }
 
     public BaseFile(String inputFileName, String outputFileName) {
         this.inputFileName = inputFileName;
@@ -33,9 +23,18 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
         }
     }
 
+    public String getInputFileName() {
+        return inputFileName;
+    }
+
+    public String getOutputFileName() {
+        return outputFileName;
+    }
+
     /**
      * This method is used to read the input files and create an
      * output file pair if it doesn't exist on the disk yet.
+     *
      * @throws IOException
      */
     @Override
@@ -50,7 +49,7 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
         }
     }
 
-    public BufferedReader GetBufferedReader(){
+    public BufferedReader GetBufferedReader() {
         FileInputStream fluxIn = null;
         try {
             fluxIn = new FileInputStream(inputFileName);
@@ -63,12 +62,11 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
         return br;
     }
 
-    public BufferedWriter GetBufferedWriter(){
+    public BufferedWriter GetBufferedWriter() {
         FileOutputStream fluxOut = null;
         try {
             fluxOut = new FileOutputStream(outputFileName);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         OutputStreamWriter osr = new OutputStreamWriter(fluxOut);
@@ -77,6 +75,7 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
         return br;
     }
 
-    public abstract HashMap<Integer,T> ParseFile();
+    public abstract HashMap<Integer, T> ParseFile();
+
     public abstract void WriteFile(Collection<T> objectsToWrite);
 }

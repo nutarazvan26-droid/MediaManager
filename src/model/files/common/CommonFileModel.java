@@ -5,10 +5,11 @@ import java.util.Objects;
 /**
  * This is the base file model class for both the locations holder and the in/out files holder
  * It implements the base interface ICommonFileModel and Comparable
- * @since 2026.19.10
+ *
  * @author RazvanNuta
  * @see java.lang.Comparable
  * @see model.files.common.ICommonFileModel
+ * @since 2026.19.10
  */
 public abstract class CommonFileModel implements Comparable, ICommonFileModel {
     private int id;
@@ -74,6 +75,7 @@ public abstract class CommonFileModel implements Comparable, ICommonFileModel {
 
     /**
      * Simple logic to sort files by file name, for other types of supported sorting, will implement different kinds of Comparators.
+     *
      * @param o the object to be compared.
      * @return -1 if the first compared file is alphabetically smaller than the second based on the name
      * @return 0 if the first compared file has the same name with the second file

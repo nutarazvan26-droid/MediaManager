@@ -56,10 +56,11 @@ public class Messages {
 
     /**
      * Method used to switch the application supported language.
+     *
      * @param locale "RO" or "EN"
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
-        this.resourceBundle = ResourceBundle.getBundle(BASE_NAME, locale);
+        resourceBundle = ResourceBundle.getBundle(BASE_NAME, locale);
     }
 }
