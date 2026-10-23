@@ -50,6 +50,14 @@ public class Messages {
         return resourceBundle.getString(key);
     }
 
+    public String get(String key) {
+        try {
+            return getLocatedMessage(key);
+        } catch (ResourceNotFoundException e) {
+            return key;
+        }
+    }
+
     public Locale getLocale() {
         return locale;
     }

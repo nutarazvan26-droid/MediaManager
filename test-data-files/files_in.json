@@ -1,262 +1,312 @@
 [
   {
     "id": 1,
-    "locationId": 1,
+    "locationId": 4,
     "name": "Alarm01.wav",
     "extension": "wav",
     "type": "AUDIO",
     "sizeBytes": 491516,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/Alarm01.wav"
+    "path": "C:\\Users\\RazvanNuta\\Music\\Alarm01.wav"
   },
   {
     "id": 2,
-    "locationId": 1,
+    "locationId": 4,
     "name": "empty.mp3",
     "extension": "mp3",
     "type": "AUDIO",
     "sizeBytes": 0,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/empty.mp3"
+    "path": "C:\\Users\\RazvanNuta\\Music\\empty.mp3"
   },
   {
     "id": 3,
-    "locationId": 1,
+    "locationId": 4,
     "name": "Ring01.wav",
     "extension": "wav",
     "type": "AUDIO",
     "sizeBytes": 498420,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/Ring01.wav"
+    "path": "C:\\Users\\RazvanNuta\\Music\\Ring01.wav"
   },
   {
     "id": 4,
-    "locationId": 1,
+    "locationId": 4,
     "name": "silence_10s.mp3",
     "extension": "mp3",
     "type": "AUDIO",
     "sizeBytes": 159802,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/silence_10s.mp3"
+    "path": "C:\\Users\\RazvanNuta\\Music\\silence_10s.mp3"
   },
   {
     "id": 5,
-    "locationId": 1,
+    "locationId": 4,
     "name": "silence_2s.mp3",
     "extension": "mp3",
     "type": "AUDIO",
     "sizeBytes": 32200,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/silence_2s.mp3"
+    "path": "C:\\Users\\RazvanNuta\\Music\\silence_2s.mp3"
   },
   {
     "id": 6,
-    "locationId": 1,
+    "locationId": 4,
     "name": "sweep_5s.wav",
     "extension": "wav",
     "type": "AUDIO",
     "sizeBytes": 220544,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/sweep_5s.wav"
+    "path": "C:\\Users\\RazvanNuta\\Music\\sweep_5s.wav"
   },
   {
     "id": 7,
-    "locationId": 1,
+    "locationId": 4,
     "name": "tone_440hz_1s.wav",
     "extension": "wav",
     "type": "AUDIO",
     "sizeBytes": 88244,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/tone_440hz_1s.wav"
+    "path": "C:\\Users\\RazvanNuta\\Music\\tone_440hz_1s.wav"
   },
   {
     "id": 8,
-    "locationId": 1,
+    "locationId": 4,
     "name": "tone_880hz_3s_stereo.wav",
     "extension": "wav",
     "type": "AUDIO",
     "sizeBytes": 529244,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/tone_880hz_3s_stereo.wav"
+    "path": "C:\\Users\\RazvanNuta\\Music\\tone_880hz_3s_stereo.wav"
   },
   {
     "id": 9,
-    "locationId": 1,
+    "locationId": 4,
     "name": "UPPERCASE.MP3",
     "extension": "mp3",
     "type": "AUDIO",
     "sizeBytes": 15938,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/UPPERCASE.MP3"
+    "path": "C:\\Users\\RazvanNuta\\Music\\UPPERCASE.MP3"
   },
   {
     "id": 10,
-    "locationId": 1,
+    "locationId": 6,
     "name": "cover.jpg",
     "extension": "jpg",
     "type": "IMAGE",
     "sizeBytes": 11375,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/albums/2026/cover.jpg"
+    "path": "C:\\Users\\RazvanNuta\\Music\\albums\\2026\\cover.jpg"
   },
   {
     "id": 11,
-    "locationId": 1,
+    "locationId": 6,
     "name": "track01.mp3",
     "extension": "mp3",
     "type": "AUDIO",
     "sizeBytes": 63882,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/music/albums/2026/track01.mp3"
+    "path": "C:\\Users\\RazvanNuta\\Music\\albums\\2026\\track01.mp3"
   },
   {
     "id": 12,
-    "locationId": 2,
+    "locationId": 7,
     "name": "chart_gray.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 1183,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/chart_gray.png"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\chart_gray.png"
   },
   {
     "id": 13,
-    "locationId": 2,
+    "locationId": 7,
     "name": "gradient_320x240.jpg",
     "extension": "jpg",
     "type": "IMAGE",
     "sizeBytes": 5346,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/gradient_320x240.jpg"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\gradient_320x240.jpg"
   },
   {
     "id": 14,
-    "locationId": 2,
+    "locationId": 7,
     "name": "imagine_\u0219coal\u0103.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 1087,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/imagine_\u0219coal\u0103.png"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\imagine_\u0219coal\u0103.png"
   },
   {
     "id": 15,
-    "locationId": 2,
+    "locationId": 7,
     "name": "img100.jpg",
     "extension": "jpg",
     "type": "IMAGE",
     "sizeBytes": 1033330,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/img100.jpg"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\img100.jpg"
   },
   {
     "id": 16,
-    "locationId": 2,
+    "locationId": 7,
     "name": "logo_transparent.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 4131,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/logo_transparent.png"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\logo_transparent.png"
   },
   {
     "id": 17,
-    "locationId": 2,
+    "locationId": 7,
     "name": "noise_1280x720.jpg",
     "extension": "jpg",
     "type": "IMAGE",
     "sizeBytes": 749905,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/noise_1280x720.jpg"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\noise_1280x720.jpg"
   },
   {
     "id": 18,
-    "locationId": 2,
+    "locationId": 7,
     "name": "palette_16.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 1132,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/palette_16.png"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\palette_16.png"
   },
   {
     "id": 19,
-    "locationId": 2,
+    "locationId": 7,
     "name": "photo.jpeg",
     "extension": "jpeg",
     "type": "IMAGE",
     "sizeBytes": 10923,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/photo.jpeg"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\photo.jpeg"
   },
   {
     "id": 20,
-    "locationId": 2,
+    "locationId": 7,
     "name": "text_1920x1080.jpg",
     "extension": "jpg",
     "type": "IMAGE",
     "sizeBytes": 45180,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/text_1920x1080.jpg"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\text_1920x1080.jpg"
   },
   {
     "id": 21,
-    "locationId": 2,
+    "locationId": 7,
     "name": "thumb_hidden.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 218,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/thumb_hidden.png"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\thumb_hidden.png"
   },
   {
     "id": 22,
-    "locationId": 2,
+    "locationId": 8,
     "name": "beach.jpg",
     "extension": "jpg",
     "type": "IMAGE",
     "sizeBytes": 17756,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/vacation/beach.jpg"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\vacation\\beach.jpg"
   },
   {
     "id": 23,
-    "locationId": 2,
+    "locationId": 8,
     "name": "sunset.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 4112,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/vacation/sunset.png"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\vacation\\sunset.png"
   },
   {
     "id": 24,
-    "locationId": 2,
+    "locationId": 9,
     "name": "deep.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 402,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/photos/vacation/nested/deep.png"
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\vacation\\nested\\deep.png"
   },
   {
     "id": 25,
-    "locationId": 3,
+    "locationId": 13,
     "name": "picture.png",
     "extension": "png",
     "type": "IMAGE",
     "sizeBytes": 1658,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/mixed/picture.png"
+    "path": "D:\\Media\\mixed\\picture.png"
   },
   {
     "id": 26,
-    "locationId": 3,
+    "locationId": 13,
     "name": "song.mp3",
     "extension": "mp3",
     "type": "AUDIO",
     "sizeBytes": 48047,
     "lastModified": "11.10.2026 10:20",
-    "path": "test-data/mixed/song.mp3"
+    "path": "D:\\Media\\mixed\\song.mp3"
+  },
+  {
+    "id": 27,
+    "locationId": 4,
+    "name": "notes.txt",
+    "extension": "txt",
+    "type": "AUDIO",
+    "sizeBytes": 47,
+    "lastModified": "21.07.2025 10:30",
+    "path": "C:\\Users\\RazvanNuta\\Music\\notes.txt"
+  },
+  {
+    "id": 28,
+    "locationId": 4,
+    "name": "minus.mp3",
+    "extension": "mp3",
+    "type": "AUDIO",
+    "sizeBytes": -5,
+    "lastModified": "21.07.2025 10:30",
+    "path": "C:\\Users\\RazvanNuta\\Music\\minus.mp3"
+  },
+  {
+    "id": 29,
+    "locationId": 99,
+    "name": "fara_locatie.png",
+    "extension": "png",
+    "type": "IMAGE",
+    "sizeBytes": 100,
+    "lastModified": "21.07.2025 10:30",
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\fara_locatie.png"
+  },
+  {
+    "id": 30,
+    "locationId": 7,
+    "name": "tip_gresit.jpg",
+    "extension": "jpg",
+    "type": "VIDEO",
+    "sizeBytes": 100,
+    "lastModified": "21.07.2025 10:30",
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\tip_gresit.jpg"
+  },
+  {
+    "id": 31,
+    "locationId": 7,
+    "name": "data_gresita.png",
+    "extension": "png",
+    "type": "IMAGE",
+    "sizeBytes": 100,
+    "lastModified": "31-02-2025",
+    "path": "C:\\Users\\RazvanNuta\\Pictures\\data_gresita.png"
   }
 ]

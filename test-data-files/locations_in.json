@@ -1,27 +1,95 @@
 [
   {
     "id": 1,
-    "name": "Muzica",
-    "path": "music"
+    "name": "Disc local (C:)",
+    "path": "C:\\",
+    "subLocations": [
+      {
+        "id": 2,
+        "name": "Utilizatori",
+        "path": "C:\\Users",
+        "subLocations": [
+          {
+            "id": 3,
+            "name": "RazvanNuta",
+            "path": "C:\\Users\\RazvanNuta",
+            "subLocations": [
+              {
+                "id": 4,
+                "name": "Muzica",
+                "path": "C:\\Users\\RazvanNuta\\Music",
+                "subLocations": [
+                  {
+                    "id": 5,
+                    "name": "Albume",
+                    "path": "C:\\Users\\RazvanNuta\\Music\\albums",
+                    "subLocations": [
+                      {
+                        "id": 6,
+                        "name": "2026",
+                        "path": "C:\\Users\\RazvanNuta\\Music\\albums\\2026",
+                        "subLocations": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 7,
+                "name": "Poze",
+                "path": "C:\\Users\\RazvanNuta\\Pictures",
+                "subLocations": [
+                  {
+                    "id": 8,
+                    "name": "Vacanta",
+                    "path": "C:\\Users\\RazvanNuta\\Pictures\\vacation",
+                    "subLocations": [
+                      {
+                        "id": 9,
+                        "name": "Imbricat",
+                        "path": "C:\\Users\\RazvanNuta\\Pictures\\vacation\\nested",
+                        "subLocations": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 10,
+                "name": "Video",
+                "path": "C:\\Users\\RazvanNuta\\Videos",
+                "subLocations": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
-    "id": 2,
-    "name": "Poze",
-    "path": "photos"
-  },
-  {
-    "id": 3,
-    "name": "Mixt",
-    "path": "mixed"
-  },
-  {
-    "id": 4,
-    "name": "Video",
-    "path": "video"
-  },
-  {
-    "id": 5,
-    "name": "Gol",
-    "path": "empty-folder"
+    "id": 11,
+    "name": "Date (D:)",
+    "path": "D:\\",
+    "subLocations": [
+      {
+        "id": 12,
+        "name": "Media",
+        "path": "D:\\Media",
+        "subLocations": [
+          {
+            "id": 13,
+            "name": "Mixt",
+            "path": "D:\\Media\\mixed",
+            "subLocations": []
+          },
+          {
+            "id": 14,
+            "name": "Gol",
+            "path": "D:\\Media\\empty-folder",
+            "subLocations": []
+          }
+        ]
+      }
+    ]
   }
 ]

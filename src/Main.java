@@ -39,7 +39,7 @@ public class Main {
         locationsMap = locationsHolder.ParseFile();
         System.out.println(locationsMap.toString());
 
-        filesMap = filesHolder.ParseFile();
+        filesMap = filesHolder.ParseFile(locationsMap);
         System.out.println(filesMap.toString());
     }
 }

@@ -2,10 +2,13 @@ package model.files.locationModels;
 
 import model.files.common.CommonFileModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LocationModel extends CommonFileModel {
     private LocationType locationType;
+    private List<LocationModel> subLocations = new ArrayList<>();
 
     public LocationModel(int id, String name, String path, LocationType locationType) {
         super(id, name, path);
@@ -18,6 +21,14 @@ public class LocationModel extends CommonFileModel {
 
     public void setLocationType(LocationType locationType) {
         this.locationType = locationType;
+    }
+
+    public List<LocationModel> getSubLocations() {
+        return subLocations;
+    }
+
+    public void setSubLocations(List<LocationModel> subLocations) {
+        this.subLocations = subLocations;
     }
 
     @Override
