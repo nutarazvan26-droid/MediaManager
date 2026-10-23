@@ -45,6 +45,12 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
         List<LocationModel> locationModelList = new ArrayList<>();
 
         JSONArray array = new JSONArray(jsonStr);
+        parseLocations(array, locationModelList, null);
+
+        return locationModelList;
+    }
+
+    private void parseLocations(JSONArray array, List<LocationModel> locationModelList, LocationModel parent) {
         for (int i = 0; i < array.length(); i++) {
             JSONObject obj = array.getJSONObject(i);
             int id = obj.getInt("id");
@@ -53,22 +59,44 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
 
             LocationModel tr = new LocationModel(id, name, path, LocationType.SYSTEM);
             locationModelList.add(tr);
-        }
+            if (parent != null) {
+                parent.getSubLocations().add(tr);
+            }
 
-        return locationModelList;
+            if (obj.has("subLocations")) {
+                parseLocations(obj.getJSONArray("subLocations"), locationModelList, tr);
+            }
+        }
     }
 
     @Override
     protected String toJSON(Collection<LocationModel> myFileList) {
+        List<LocationModel> subLocations = new ArrayList<>();
+        for (LocationModel mf : myFileList) {
+            subLocations.addAll(mf.getSubLocations());
+        }
+
         JSONArray array = new JSONArray();
         for (LocationModel mf : myFileList) {
-            JSONObject obj = new JSONObject();
-            obj.put("id", mf.getId());
-            obj.put("name", mf.getName());
-            obj.put("path", mf.getPath());
-            obj.put("locationType", mf.getLocationType());
-            array.put(obj);
+            if (!subLocations.contains(mf)) {
+                array.put(toJSONObject(mf));
+            }
         }
         return array.toString();
+    }
+
+    private JSONObject toJSONObject(LocationModel mf) {
+        JSONObject obj = new JSONObject();
+        obj.put("id", mf.getId());
+        obj.put("name", mf.getName());
+        obj.put("path", mf.getPath());
+        obj.put("locationType", mf.getLocationType());
+
+        JSONArray subLocations = new JSONArray();
+        for (LocationModel subLocation : mf.getSubLocations()) {
+            subLocations.put(toJSONObject(subLocation));
+        }
+        obj.put("subLocations", subLocations);
+        return obj;
     }
 }

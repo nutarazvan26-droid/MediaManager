@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="parse input files, save in hashmap and print">
-      <change afterPath="$PROJECT_DIR$/src/model/files/common/ICommonFileModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/InputScanner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/Menu.java" afterDir="false" />
+    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="run optimize code from intellij and optimize imports">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/BaseFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/BaseFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/CommonFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/CommonFileModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/IFileMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/IFileMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/JsonFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/common/JsonFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/LocationModels/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/locationModels/LocationModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/LocationModels/MyLocationsInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/locationModels/MyLocationsHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/MediaFiles/MyFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFileModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/files/MediaFiles/MyFilesIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFilesHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/Messages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/MessagesBundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/MessagesBundle_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/MessagesBundle_ro.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/MessagesBundle_ro.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/locationModels/LocationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/locationModels/LocationModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/locationModels/MyLocationsHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/locationModels/MyLocationsHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFilesHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFilesHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-data-files/files_in.json" beforeDir="false" afterPath="$PROJECT_DIR$/test-data-files/files_in.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-data-files/files_in_invalid.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-data-files/locations_in.json" beforeDir="false" afterPath="$PROJECT_DIR$/test-data-files/locations_in.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DBNavigator.Project.Workspace.Settings">
+    <assistant-settings>
+      <credential-settings>
+        <credentials />
+      </credential-settings>
+      <profile-settings>
+        <profiles />
+      </profile-settings>
+      <mcp-server-settings>
+        <workspace-integration value="false" />
+        <mcp-servers />
+        <mcp-tool-approvals />
+      </mcp-server-settings>
+    </assistant-settings>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -140,7 +152,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="parse files 1" />
     <MESSAGE value="parse input files, save in hashmap and print" />
-    <option name="LAST_COMMIT_MESSAGE" value="parse input files, save in hashmap and print" />
+    <MESSAGE value="write output files, more javadocs added, exit behavour" />
+    <MESSAGE value="run optimize code from intellij and optimize imports" />
+    <option name="LAST_COMMIT_MESSAGE" value="run optimize code from intellij and optimize imports" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
