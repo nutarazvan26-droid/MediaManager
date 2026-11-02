@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 enum LocationType {
@@ -28,6 +29,7 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
     private static final String LOCATIONS_IN_LOCATION = "test-data-files\\locations_in.json";
     private static final String LOCATIONS_OUT_LOCATION = "test-data-files\\locations_out.json";
     private static MyLocationsHolder instance;
+    private HashMap<Integer, LocationModel> locations;
 
     private MyLocationsHolder(String inputFileName, String outputFileName) {
         super(inputFileName, outputFileName);
@@ -38,6 +40,31 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
             instance = new MyLocationsHolder(MyLocationsHolder.LOCATIONS_IN_LOCATION, MyLocationsHolder.LOCATIONS_OUT_LOCATION);
         }
         return instance;
+    }
+
+    @Override
+    public HashMap<Integer, LocationModel> ParseFile() {
+        locations = super.ParseFile();
+        return locations;
+    }
+
+    public HashMap<Integer, LocationModel> getLocations() {
+        return locations;
+    }
+
+    public List<LocationModel> getRootLocations(Collection<LocationModel> allLocations) {
+        List<LocationModel> subLocations = new ArrayList<>();
+        for (LocationModel location : allLocations) {
+            subLocations.addAll(location.getSubLocations());
+        }
+
+        List<LocationModel> rootLocations = new ArrayList<>();
+        for (LocationModel location : allLocations) {
+            if (!subLocations.contains(location)) {
+                rootLocations.add(location);
+            }
+        }
+        return rootLocations;
     }
 
     @Override
@@ -71,16 +98,9 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
 
     @Override
     protected String toJSON(Collection<LocationModel> myFileList) {
-        List<LocationModel> subLocations = new ArrayList<>();
-        for (LocationModel mf : myFileList) {
-            subLocations.addAll(mf.getSubLocations());
-        }
-
         JSONArray array = new JSONArray();
-        for (LocationModel mf : myFileList) {
-            if (!subLocations.contains(mf)) {
-                array.put(toJSONObject(mf));
-            }
+        for (LocationModel mf : getRootLocations(myFileList)) {
+            array.put(toJSONObject(mf));
         }
         return array.toString();
     }
