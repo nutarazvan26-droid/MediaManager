@@ -3,6 +3,7 @@ import model.files.locationModels.LocationModel;
 import model.files.locationModels.MyLocationsHolder;
 import model.files.mediaFiles.MyFileModel;
 import model.files.mediaFiles.MyFilesHolder;
+import ui.Menu;
 
 import java.util.HashMap;
 
@@ -20,11 +21,11 @@ public class Main {
         }));
 
         startApp();
-
+        Menu.GetInstance().start();
     }
 
     private static void exit() {
-        System.out.println("Application closed.");
+        System.out.println(messages.get("label.app.closed"));
         MyLocationsHolder locationsHolder = MyLocationsHolder.GetInstance();
         MyFilesHolder filesHolder = MyFilesHolder.GetInstance();
 
@@ -37,9 +38,7 @@ public class Main {
         MyFilesHolder filesHolder = MyFilesHolder.GetInstance();
 
         locationsMap = locationsHolder.ParseFile();
-        System.out.println(locationsMap.toString());
 
         filesMap = filesHolder.ParseFile(locationsMap);
-        System.out.println(filesMap.toString());
     }
 }

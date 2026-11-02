@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="Extend locations to have sub locations similar to a real desktop, validate input files and relevant properties to have proper values. Use the i8n messages class.">
+    <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="forgot to include media type">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/i18n/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/i18n/Messages.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_ro.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_ro.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/InputScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/InputScanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/MessagesBundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/MessagesBundle_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/MessagesBundle_ro.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/MessagesBundle_ro.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/InputScanner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +150,8 @@
     <MESSAGE value="write output files, more javadocs added, exit behavour" />
     <MESSAGE value="run optimize code from intellij and optimize imports" />
     <MESSAGE value="Extend locations to have sub locations similar to a real desktop, validate input files and relevant properties to have proper values. Use the i8n messages class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Extend locations to have sub locations similar to a real desktop, validate input files and relevant properties to have proper values. Use the i8n messages class." />
+    <MESSAGE value="forgot to include media type" />
+    <option name="LAST_COMMIT_MESSAGE" value="forgot to include media type" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
