@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.DuplicateLocationException;
+import exceptions.InvalidLocationException;
 import exceptions.InvalidOptionException;
 import i18n.Messages;
 import model.files.locationModels.LocationModel;
@@ -12,8 +14,11 @@ import java.util.Scanner;
 
 public final class Menu {
     private static final int OPTION_EXIT = 0;
-    private static final int OPTION_CHANGE_LANGUAGE = 1;
-    private static final int OPTION_SHOW_LOCATIONS = 2;
+    private static final int OPTION_LOCATIONS = 1;
+    private static final int OPTION_CHANGE_LANGUAGE = 2;
+    private static final int OPTION_BACK = 0;
+    private static final int OPTION_SHOW_LOCATIONS = 1;
+    private static final int OPTION_ADD_LOCATION = 2;
     private static final String INVALID_OPTION = "label.error.input.invalid-option";
     private static final String INDENT = "    ";
     private static final Messages messages = Messages.getInstance();
@@ -35,13 +40,13 @@ public final class Menu {
         while (running) {
             printMenu();
             try {
-                int option = readOption(OPTION_EXIT, OPTION_SHOW_LOCATIONS);
+                int option = readOption(OPTION_EXIT, OPTION_CHANGE_LANGUAGE);
                 switch (option) {
+                    case OPTION_LOCATIONS:
+                        locationsMenu();
+                        break;
                     case OPTION_CHANGE_LANGUAGE:
                         changeLanguage();
-                        break;
-                    case OPTION_SHOW_LOCATIONS:
-                        showLocations();
                         break;
                     case OPTION_EXIT:
                         running = false;
@@ -60,9 +65,43 @@ public final class Menu {
     private void printMenu() {
         System.out.println();
         System.out.println(messages.get("label.menu.title"));
+        System.out.println(OPTION_LOCATIONS + ". " + messages.get("label.menu.locations"));
         System.out.println(OPTION_CHANGE_LANGUAGE + ". " + messages.get("label.menu.change-language"));
-        System.out.println(OPTION_SHOW_LOCATIONS + ". " + messages.get("label.menu.show-locations"));
         System.out.println(OPTION_EXIT + ". " + messages.get("label.menu.exit"));
+        System.out.print(messages.get("label.menu.choose-option") + ": ");
+    }
+
+    private void locationsMenu() {
+        boolean inLocationsMenu = true;
+        while (inLocationsMenu) {
+            printLocationsMenu();
+            try {
+                int option = readOption(OPTION_BACK, OPTION_ADD_LOCATION);
+                switch (option) {
+                    case OPTION_SHOW_LOCATIONS:
+                        showLocations();
+                        break;
+                    case OPTION_ADD_LOCATION:
+                        addLocation();
+                        break;
+                    case OPTION_BACK:
+                        inLocationsMenu = false;
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(messages.get("label.error.input.not-a-number"));
+            } catch (InvalidOptionException | InvalidLocationException | DuplicateLocationException e) {
+                System.out.println(messages.get(e.getMessage()));
+            }
+        }
+    }
+
+    private void printLocationsMenu() {
+        System.out.println();
+        System.out.println(messages.get("label.menu.locations.title"));
+        System.out.println(OPTION_SHOW_LOCATIONS + ". " + messages.get("label.menu.show-locations"));
+        System.out.println(OPTION_ADD_LOCATION + ". " + messages.get("label.menu.add-location"));
+        System.out.println(OPTION_BACK + ". " + messages.get("label.menu.back"));
         System.out.print(messages.get("label.menu.choose-option") + ": ");
     }
 
@@ -109,5 +148,17 @@ public final class Menu {
         for (LocationModel subLocation : location.getSubLocations()) {
             printLocation(subLocation, indent + INDENT);
         }
+    }
+
+    private void addLocation() throws InvalidLocationException, DuplicateLocationException {
+        MyLocationsHolder locationsHolder = MyLocationsHolder.GetInstance();
+        System.out.print(messages.get("label.location.enter-path") + ": ");
+        String path = locationsHolder.validatePath(scanner.nextLine().trim());
+
+        System.out.print(messages.get("label.location.enter-name") + ": ");
+        LocationModel location = locationsHolder.addLocation(path, scanner.nextLine().trim());
+
+        System.out.println(messages.get("label.location.added"));
+        printLocation(location, "");
     }
 }

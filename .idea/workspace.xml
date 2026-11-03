@@ -3,13 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b52b0889-839e-4679-bd5b-009a9b9261e0" name="Changes" comment="implement initial menu with working options">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MediaManager/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_ro.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MediaManager/i18n/MessagesBundle_ro.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/i18n/MessagesBundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/MessagesBundle_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/i18n/MessagesBundle_ro.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/MessagesBundle_ro.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/files/locationModels/MyLocationsHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/locationModels/MyLocationsHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFilesHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/files/mediaFiles/MyFilesHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-data-files/files_in.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-data-files/locations_in.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

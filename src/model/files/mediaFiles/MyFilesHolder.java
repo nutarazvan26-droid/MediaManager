@@ -27,8 +27,7 @@ import java.util.List;
  * @since 2026.10.18
  */
 public final class MyFilesHolder extends JsonFile<MyFileModel> {
-    private static final String FILES_IN_LOCATION = "test-data-files\\files_in.json";
-    private static final String FILES_OUT_LOCATION = "test-data-files\\files_out.json";
+    private static final String FILES_LOCATION = "test-data-files\\files.json";
     private static final String DATE_FORMAT = "dd.MM.yyyy HH:mm";
     private static final Messages messages = Messages.getInstance();
     private static MyFilesHolder instance;
@@ -43,7 +42,7 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
     public static MyFilesHolder GetInstance() {
         if (instance == null) {
             try {
-                instance = new MyFilesHolder(MyFilesHolder.FILES_IN_LOCATION, MyFilesHolder.FILES_OUT_LOCATION);
+                instance = new MyFilesHolder(MyFilesHolder.FILES_LOCATION, MyFilesHolder.FILES_LOCATION);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
