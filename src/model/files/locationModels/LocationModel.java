@@ -43,7 +43,7 @@ public class LocationModel extends CommonFileModel {
     public String toString() {
         return "Location{" +
                 "locationType=" + locationType +
-                '}';
+                "} " + super.toString();
     }
 
     @Override

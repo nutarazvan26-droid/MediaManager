@@ -11,7 +11,7 @@ import java.util.Objects;
  * @see model.files.common.ICommonFileModel
  * @since 2026.19.10
  */
-public abstract class CommonFileModel implements Comparable, ICommonFileModel {
+public abstract class CommonFileModel implements Comparable<CommonFileModel>, ICommonFileModel {
     private int id;
     private String name;
     private String path;
@@ -82,9 +82,7 @@ public abstract class CommonFileModel implements Comparable, ICommonFileModel {
      * @return 1 if the first compared file is alphabetically bigger than the second based on the name
      */
     @Override
-    public int compareTo(Object o) {
-        if (!(o instanceof CommonFileModel)) return -1; // or throw InvalidComparedCustomException?
-        ICommonFileModel comparedFile = (ICommonFileModel) o;
-        return this.name.compareTo(comparedFile.getName());
+    public int compareTo(CommonFileModel o) {
+        return String.CASE_INSENSITIVE_ORDER.compare(this.name, o.getName());
     }
 }

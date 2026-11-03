@@ -1,5 +1,6 @@
 package model.files.mediaFiles;
 
+import exceptions.InvalidFilterException;
 import i18n.Messages;
 import model.files.common.JsonFile;
 import model.files.locationModels.LocationModel;
@@ -7,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This is my files holder singleton implementation for holding the single ref point to files_in.json,
@@ -28,31 +29,101 @@ import java.util.List;
  */
 public final class MyFilesHolder extends JsonFile<MyFileModel> {
     private static final String FILES_LOCATION = "test-data-files\\files.json";
-    private static final String DATE_FORMAT = "dd.MM.yyyy HH:mm";
+    public static final String DATE_FORMAT = "dd.MM.yyyy HH:mm";
     private static final Messages messages = Messages.getInstance();
     private static MyFilesHolder instance;
-    private final String FILES_IN_INVALID_EXAMPLE_LOCATION = "test-data-files\\files_in_invalid_example.json";
     private HashMap<Integer, LocationModel> locationsMap;
+    private HashMap<Integer, MyFileModel> files;
 
-    private MyFilesHolder(String inputFileName, String outputFileName) throws FileNotFoundException {
+    private MyFilesHolder(String inputFileName, String outputFileName) {
         super(inputFileName, outputFileName);
     }
 
-
     public static MyFilesHolder GetInstance() {
         if (instance == null) {
-            try {
-                instance = new MyFilesHolder(MyFilesHolder.FILES_LOCATION, MyFilesHolder.FILES_LOCATION);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+            instance = new MyFilesHolder(MyFilesHolder.FILES_LOCATION, MyFilesHolder.FILES_LOCATION);
         }
         return instance;
     }
 
     public HashMap<Integer, MyFileModel> ParseFile(HashMap<Integer, LocationModel> locationsMap) {
         this.locationsMap = locationsMap;
-        return ParseFile();
+        files = ParseFile();
+        return files;
+    }
+
+    public HashMap<Integer, MyFileModel> getFiles() {
+        return files;
+    }
+
+    public int removeFilesOfLocations(List<Integer> locationIds) {
+        int filesCount = files.size();
+        files.values().removeIf(file -> locationIds.contains(file.getLocationId()));
+        return filesCount - files.size();
+    }
+
+    public List<MyFileModel> filterFiles(FileFilterType filterType, String value) throws InvalidFilterException {
+        String filterValue = value;
+        if (filterType == FileFilterType.EXTENSION) {
+            filterValue = validateExtension(value);
+        } else if (filterType == FileFilterType.NAME && value.isEmpty()) {
+            throw new InvalidFilterException("label.error.filter.empty-name");
+        }
+
+        List<MyFileModel> filteredFiles = new ArrayList<>();
+        for (MyFileModel file : files.values()) {
+            if (filterType.matches(file, filterValue)) {
+                filteredFiles.add(file);
+            }
+        }
+        return filteredFiles;
+    }
+
+    private String validateExtension(String extension) throws InvalidFilterException {
+        if (extension.isEmpty()) {
+            throw new InvalidFilterException("label.error.filter.empty-extension");
+        }
+
+        String normalizedExtension = extension.startsWith(".") ? extension.substring(1) : extension;
+        if (MediaType.fromExtension(normalizedExtension) == null) {
+            throw new InvalidFilterException("label.error.filter.unsupported-extension");
+        }
+        return normalizedExtension;
+    }
+
+    public int[] countFilesByType() {
+        int[] filesCount = new int[MediaType.values().length];
+        for (MyFileModel file : files.values()) {
+            filesCount[file.getType().ordinal()]++;
+        }
+        return filesCount;
+    }
+
+    public long[] sumSizesByType() {
+        long[] sizes = new long[MediaType.values().length];
+        for (MyFileModel file : files.values()) {
+            sizes[file.getType().ordinal()] += file.getSizeBytes();
+        }
+        return sizes;
+    }
+
+    public int[] countFilesByExtension() {
+        List<String> extensions = MediaType.getAllExtensions();
+        int[] filesCount = new int[extensions.size()];
+        for (MyFileModel file : files.values()) {
+            filesCount[extensions.indexOf(file.getExtension().toLowerCase(Locale.ROOT))]++;
+        }
+        return filesCount;
+    }
+
+    public MyFileModel findLargestFile() {
+        MyFileModel largestFile = null;
+        for (MyFileModel file : files.values()) {
+            if (largestFile == null || file.getSizeBytes() > largestFile.getSizeBytes()) {
+                largestFile = file;
+            }
+        }
+        return largestFile;
     }
 
     @Override
@@ -146,7 +217,7 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
                 continue;
             }
 
-            MyFileModel mf = new MyFileModel(id, name, path, locationId, extension, type.name(), sizeBytes, lastModified);
+            MyFileModel mf = new MyFileModel(id, name, path, locationId, extension, type, sizeBytes, lastModified);
             myFileList.add(mf);
         }
         return myFileList;

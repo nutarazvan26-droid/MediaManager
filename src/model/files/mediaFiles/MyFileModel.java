@@ -8,11 +8,11 @@ import java.util.Objects;
 public class MyFileModel extends CommonFileModel {
     private int locationId;
     private String extension;
-    private String type;
+    private MediaType type;
     private long sizeBytes;
     private Date lastModified;
 
-    public MyFileModel(int id, String name, String path, int locationId, String extension, String type, long sizeBytes, Date lastModified) {
+    public MyFileModel(int id, String name, String path, int locationId, String extension, MediaType type, long sizeBytes, Date lastModified) {
         super(id, name, path);
         this.locationId = locationId;
         this.extension = extension;
@@ -26,7 +26,7 @@ public class MyFileModel extends CommonFileModel {
         if (!(o instanceof MyFileModel)) return false;
         if (!super.equals(o)) return false;
         MyFileModel myFile = (MyFileModel) o;
-        return locationId == myFile.locationId && sizeBytes == myFile.sizeBytes && Objects.equals(extension, myFile.extension) && Objects.equals(type, myFile.type) && Objects.equals(lastModified, myFile.lastModified);
+        return locationId == myFile.locationId && sizeBytes == myFile.sizeBytes && Objects.equals(extension, myFile.extension) && type == myFile.type && Objects.equals(lastModified, myFile.lastModified);
     }
 
     @Override
@@ -50,11 +50,11 @@ public class MyFileModel extends CommonFileModel {
         this.extension = extension;
     }
 
-    public String getType() {
+    public MediaType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(MediaType type) {
         this.type = type;
     }
 
@@ -79,9 +79,9 @@ public class MyFileModel extends CommonFileModel {
         return "MyFile{" +
                 "locationId=" + locationId +
                 ", extension='" + extension + '\'' +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", sizeBytes=" + sizeBytes +
                 ", lastModified=" + lastModified +
-                '}';
+                "} " + super.toString();
     }
 }

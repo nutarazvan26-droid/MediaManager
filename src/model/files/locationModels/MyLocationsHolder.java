@@ -2,6 +2,7 @@ package model.files.locationModels;
 
 import exceptions.DuplicateLocationException;
 import exceptions.InvalidLocationException;
+import exceptions.LocationNotFoundException;
 import model.files.common.JsonFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,11 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-
-enum LocationType {
-    SYSTEM,
-    USER_CREATED
-}
 
 /**
  * This is my locations holder singleton implementation for holding the single ref point to locations_in.json,
@@ -112,6 +108,33 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
         return location;
     }
 
+    public List<LocationModel> findByNameOrId(String nameOrId) throws InvalidLocationException, LocationNotFoundException {
+        if (nameOrId.isEmpty()) {
+            throw new InvalidLocationException("label.error.location.empty-name-or-id");
+        }
+
+        List<LocationModel> matches = new ArrayList<>();
+        for (LocationModel location : locations.values()) {
+            if (location.getName().equalsIgnoreCase(nameOrId) || String.valueOf(location.getId()).equals(nameOrId)) {
+                matches.add(location);
+            }
+        }
+        if (matches.isEmpty()) {
+            throw new LocationNotFoundException("label.error.location.not-found");
+        }
+        return matches;
+    }
+
+    public List<Integer> deleteLocation(LocationModel location) {
+        for (LocationModel parent : locations.values()) {
+            parent.getSubLocations().remove(location);
+        }
+
+        List<Integer> deletedIds = new ArrayList<>();
+        removeWithSubLocations(location, deletedIds);
+        return deletedIds;
+    }
+
     private String normalizePath(String path) {
         String normalizedPath = path.replace('/', '\\');
         while (normalizedPath.length() > DRIVE_LENGTH && normalizedPath.endsWith("\\")) {
@@ -198,6 +221,14 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
         return maxId + 1;
     }
 
+    private void removeWithSubLocations(LocationModel location, List<Integer> deletedIds) {
+        locations.remove(location.getId());
+        deletedIds.add(location.getId());
+        for (LocationModel subLocation : location.getSubLocations()) {
+            removeWithSubLocations(subLocation, deletedIds);
+        }
+    }
+
     @Override
     protected List<LocationModel> parseJSON(String jsonStr) {
         List<LocationModel> locationModelList = new ArrayList<>();
@@ -214,8 +245,9 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
             int id = obj.getInt("id");
             String name = obj.getString("name");
             String path = obj.getString("path");
+            LocationType locationType = obj.optEnum(LocationType.class, "locationType", LocationType.SYSTEM);
 
-            LocationModel tr = new LocationModel(id, name, path, LocationType.SYSTEM);
+            LocationModel tr = new LocationModel(id, name, path, locationType);
             locationModelList.add(tr);
             if (parent != null) {
                 parent.getSubLocations().add(tr);

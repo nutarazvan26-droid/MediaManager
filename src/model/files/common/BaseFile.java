@@ -1,6 +1,7 @@
 package model.files.common;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -56,7 +57,7 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        InputStreamReader isr = new InputStreamReader(fluxIn);
+        InputStreamReader isr = new InputStreamReader(fluxIn, StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(isr);
 
         return br;
@@ -69,7 +70,7 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        OutputStreamWriter osr = new OutputStreamWriter(fluxOut);
+        OutputStreamWriter osr = new OutputStreamWriter(fluxOut, StandardCharsets.UTF_8);
         BufferedWriter br = new BufferedWriter(osr);
 
         return br;

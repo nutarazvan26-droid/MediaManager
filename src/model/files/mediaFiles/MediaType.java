@@ -1,5 +1,9 @@
 package model.files.mediaFiles;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum MediaType {
     AUDIO("mp3", "wav"),
     IMAGE("jpg", "jpeg", "png"),
@@ -24,5 +28,13 @@ public enum MediaType {
             }
         }
         return null;
+    }
+
+    public static List<String> getAllExtensions() {
+        List<String> allExtensions = new ArrayList<>();
+        for (MediaType type : MediaType.values()) {
+            allExtensions.addAll(Arrays.asList(type.extensions));
+        }
+        return allExtensions;
     }
 }
