@@ -1,5 +1,7 @@
 package model.files.common;
 
+import exceptions.DataFileException;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
@@ -15,13 +17,6 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
     public BaseFile(String inputFileName, String outputFileName) {
         this.inputFileName = inputFileName;
         this.outputFileName = outputFileName;
-        try {
-            ReadFile();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public String getInputFileName() {
@@ -50,33 +45,23 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
         }
     }
 
-    public BufferedReader GetBufferedReader() {
-        FileInputStream fluxIn = null;
-        try {
-            fluxIn = new FileInputStream(inputFileName);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public BufferedReader GetBufferedReader() throws FileNotFoundException {
+        FileInputStream fluxIn = new FileInputStream(inputFileName);
         InputStreamReader isr = new InputStreamReader(fluxIn, StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(isr);
 
         return br;
     }
 
-    public BufferedWriter GetBufferedWriter() {
-        FileOutputStream fluxOut = null;
-        try {
-            fluxOut = new FileOutputStream(outputFileName);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public BufferedWriter GetBufferedWriter() throws FileNotFoundException {
+        FileOutputStream fluxOut = new FileOutputStream(outputFileName);
         OutputStreamWriter osr = new OutputStreamWriter(fluxOut, StandardCharsets.UTF_8);
         BufferedWriter br = new BufferedWriter(osr);
 
         return br;
     }
 
-    public abstract HashMap<Integer, T> ParseFile();
+    public abstract HashMap<Integer, T> ParseFile() throws DataFileException;
 
-    public abstract void WriteFile(Collection<T> objectsToWrite);
+    public abstract void WriteFile(Collection<T> objectsToWrite) throws DataFileException;
 }

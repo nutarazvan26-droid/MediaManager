@@ -1,10 +1,13 @@
 package model.files.locationModels;
 
+import exceptions.DataFileException;
 import exceptions.DuplicateLocationException;
 import exceptions.InvalidLocationException;
 import exceptions.LocationNotFoundException;
+import i18n.Messages;
 import model.files.common.JsonFile;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
     private static final String PATH_PATTERN = DRIVE_PATTERN + ".*";
     private static final String INVALID_CHARACTERS = ":*?\"<>|";
     private static final int DRIVE_LENGTH = 3;
+    private static final Messages messages = Messages.getInstance();
     private static MyLocationsHolder instance;
     private HashMap<Integer, LocationModel> locations;
 
@@ -44,7 +48,7 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
     }
 
     @Override
-    public HashMap<Integer, LocationModel> ParseFile() {
+    public HashMap<Integer, LocationModel> ParseFile() throws DataFileException {
         locations = super.ParseFile();
         return locations;
     }
@@ -123,6 +127,23 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
             throw new LocationNotFoundException("label.error.location.not-found");
         }
         return matches;
+    }
+
+    public LocationModel findLocationByPath(String path) throws InvalidLocationException, LocationNotFoundException {
+        if (path.isEmpty()) {
+            throw new InvalidLocationException("label.error.location.empty-path");
+        }
+
+        String normalizedPath = normalizePath(path);
+        if (!isValidPath(normalizedPath)) {
+            throw new InvalidLocationException("label.error.location.invalid-path");
+        }
+
+        LocationModel location = findByPath(normalizedPath);
+        if (location == null) {
+            throw new LocationNotFoundException("label.error.move.location-not-found");
+        }
+        return location;
     }
 
     public List<Integer> deleteLocation(LocationModel location) {
@@ -241,20 +262,84 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
 
     private void parseLocations(JSONArray array, List<LocationModel> locationModelList, LocationModel parent) {
         for (int i = 0; i < array.length(); i++) {
-            JSONObject obj = array.getJSONObject(i);
-            int id = obj.getInt("id");
-            String name = obj.getString("name");
-            String path = obj.getString("path");
-            LocationType locationType = obj.optEnum(LocationType.class, "locationType", LocationType.SYSTEM);
+            JSONObject obj = null;
+            String name = null;
+            try {
+                obj = array.getJSONObject(i);
+                name = obj.getString("name");
+            } catch (JSONException e) {
+                System.out.println(messages.get("label.error.location.ignored.unreadable") + ": " + (i + 1));
+                continue;
+            }
 
+            int id = 0;
+            try {
+                id = obj.getInt("id");
+            } catch (JSONException e) {
+                System.out.println(messages.get("label.error.location.ignored.invalid-id") + ": " + name);
+                continue;
+            }
+
+            String path = null;
+            try {
+                path = obj.getString("path");
+            } catch (JSONException e) {
+                System.out.println(messages.get("label.error.location.ignored.invalid-path") + ": " + name);
+                continue;
+            }
+
+            JSONArray subLocations = new JSONArray();
+            try {
+                if (obj.has("subLocations")) {
+                    subLocations = obj.getJSONArray("subLocations");
+                }
+            } catch (JSONException e) {
+                System.out.println(messages.get("label.error.location.ignored.invalid-sublocations") + ": " + name);
+                continue;
+            }
+
+            try {
+                validateLocation(id, name, path, parent, locationModelList);
+            } catch (InvalidLocationException | DuplicateLocationException e) {
+                System.out.println(messages.get(e.getMessage()) + ": " + name);
+                continue;
+            }
+
+            LocationType locationType = obj.optEnum(LocationType.class, "locationType", LocationType.SYSTEM);
             LocationModel tr = new LocationModel(id, name, path, locationType);
             locationModelList.add(tr);
             if (parent != null) {
                 parent.getSubLocations().add(tr);
             }
 
-            if (obj.has("subLocations")) {
-                parseLocations(obj.getJSONArray("subLocations"), locationModelList, tr);
+            parseLocations(subLocations, locationModelList, tr);
+        }
+    }
+
+    private void validateLocation(int id, String name, String path, LocationModel parent, List<LocationModel> acceptedLocations) throws InvalidLocationException, DuplicateLocationException {
+        if (name.trim().isEmpty()) {
+            throw new InvalidLocationException("label.error.location.ignored.empty-name");
+        }
+
+        String normalizedPath = normalizePath(path);
+        if (!isValidPath(normalizedPath)) {
+            throw new InvalidLocationException("label.error.location.ignored.invalid-path");
+        }
+        if (parent == null && !isDrive(normalizedPath)) {
+            throw new InvalidLocationException("label.error.location.ignored.root-not-drive");
+        }
+        if (parent != null && !isSubfolder(normalizedPath, normalizePath(parent.getPath()))) {
+            throw new InvalidLocationException("label.error.location.ignored.outside-parent");
+        }
+
+        for (LocationModel location : acceptedLocations) {
+            if (location.getId() == id) {
+                throw new DuplicateLocationException("label.error.location.ignored.duplicate-id");
+            }
+        }
+        for (LocationModel location : acceptedLocations) {
+            if (normalizePath(location.getPath()).equalsIgnoreCase(normalizedPath)) {
+                throw new DuplicateLocationException("label.error.location.ignored.duplicate-path");
             }
         }
     }

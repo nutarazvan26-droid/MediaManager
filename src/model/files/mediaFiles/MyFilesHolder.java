@@ -1,6 +1,11 @@
 package model.files.mediaFiles;
 
+import exceptions.DataFileException;
+import exceptions.DuplicateMediaFileException;
 import exceptions.InvalidFilterException;
+import exceptions.InvalidLocationException;
+import exceptions.InvalidMediaFileException;
+import exceptions.MediaFileNotFoundException;
 import i18n.Messages;
 import model.files.common.JsonFile;
 import model.files.locationModels.LocationModel;
@@ -14,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -46,7 +52,7 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
         return instance;
     }
 
-    public HashMap<Integer, MyFileModel> ParseFile(HashMap<Integer, LocationModel> locationsMap) {
+    public HashMap<Integer, MyFileModel> ParseFile(HashMap<Integer, LocationModel> locationsMap) throws DataFileException {
         this.locationsMap = locationsMap;
         files = ParseFile();
         return files;
@@ -60,6 +66,42 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
         int filesCount = files.size();
         files.values().removeIf(file -> locationIds.contains(file.getLocationId()));
         return filesCount - files.size();
+    }
+
+    public List<MyFileModel> findByNameOrId(String nameOrId) throws InvalidMediaFileException, MediaFileNotFoundException {
+        if (nameOrId.isEmpty()) {
+            throw new InvalidMediaFileException("label.error.move.empty-name-or-id");
+        }
+
+        List<MyFileModel> matches = new ArrayList<>();
+        for (MyFileModel file : files.values()) {
+            if (file.getName().equalsIgnoreCase(nameOrId) || String.valueOf(file.getId()).equals(nameOrId)) {
+                matches.add(file);
+            }
+        }
+        if (matches.isEmpty()) {
+            throw new MediaFileNotFoundException("label.error.move.file-not-found");
+        }
+        return matches;
+    }
+
+    public void moveFile(MyFileModel file, LocationModel location) throws InvalidLocationException, DuplicateMediaFileException {
+        if (file.getLocationId() == location.getId()) {
+            throw new InvalidLocationException("label.error.move.same-location");
+        }
+        for (MyFileModel other : files.values()) {
+            if (other.getLocationId() == location.getId() && other.getName().equalsIgnoreCase(file.getName())) {
+                throw new DuplicateMediaFileException("label.error.move.duplicate-name");
+            }
+        }
+
+        file.setLocationId(location.getId());
+        file.setPath(buildPath(location, file.getName()));
+    }
+
+    private String buildPath(LocationModel location, String name) {
+        String locationPath = location.getPath();
+        return locationPath.endsWith("\\") ? locationPath + name : locationPath + "\\" + name;
     }
 
     public List<MyFileModel> filterFiles(FileFilterType filterType, String value) throws InvalidFilterException {
@@ -129,6 +171,7 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
     @Override
     protected List<MyFileModel> parseJSON(String jsonStr) {
         List<MyFileModel> myFileList = new ArrayList<>();
+        HashSet<Integer> ids = new HashSet<>();
 
         JSONArray array = new JSONArray(jsonStr);
         for (int i = 0; i < array.length(); i++) {
@@ -147,6 +190,10 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
                 id = obj.getInt("id");
             } catch (JSONException e) {
                 System.out.println(messages.get("label.error.file.invalid-id") + ": " + name);
+                continue;
+            }
+            if (ids.contains(id)) {
+                System.out.println(messages.get("label.error.file.duplicate-id") + ": " + name);
                 continue;
             }
 
@@ -171,6 +218,10 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
             }
             if (MediaType.fromExtension(extension) == null) {
                 System.out.println(messages.get("label.error.file.invalid-extension") + ": " + name);
+                continue;
+            }
+            if (!name.toLowerCase(Locale.ROOT).endsWith("." + extension.toLowerCase(Locale.ROOT))) {
+                System.out.println(messages.get("label.error.file.extension-mismatch") + ": " + name);
                 continue;
             }
 
@@ -216,9 +267,14 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
                 System.out.println(messages.get("label.error.file.invalid-path") + ": " + name);
                 continue;
             }
+            if (locationsMap != null && !path.equalsIgnoreCase(buildPath(locationsMap.get(locationId), name))) {
+                System.out.println(messages.get("label.error.file.path-mismatch") + ": " + name);
+                continue;
+            }
 
             MyFileModel mf = new MyFileModel(id, name, path, locationId, extension, type, sizeBytes, lastModified);
             myFileList.add(mf);
+            ids.add(id);
         }
         return myFileList;
     }

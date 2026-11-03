@@ -1,5 +1,9 @@
 package model.files.common;
 
+import exceptions.DataFileException;
+import i18n.Messages;
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -17,6 +21,7 @@ import java.util.List;
  * @see BaseFile
  */
 public abstract class JsonFile<T extends ICommonFileModel> extends BaseFile<T> {
+    private static final Messages messages = Messages.getInstance();
 
     public JsonFile(String inputFileName, String outputFileName) {
         super(inputFileName, outputFileName);
@@ -33,10 +38,19 @@ public abstract class JsonFile<T extends ICommonFileModel> extends BaseFile<T> {
      * @since 2026.19.10
      */
     @Override
-    public HashMap<Integer, T> ParseFile() {
+    public HashMap<Integer, T> ParseFile() throws DataFileException {
         HashMap<Integer, T> myFiles = new HashMap<>();
         String linie = "";
         String jsonStr = "";
+
+        try {
+            ReadFile();
+        } catch (FileNotFoundException e) {
+            System.out.println(messages.get("label.error.data.not-found") + ": " + getInputFileName());
+            return myFiles;
+        } catch (IOException e) {
+            throw new DataFileException("label.error.data.unreadable");
+        }
 
         try {
             BufferedReader br = GetBufferedReader();
@@ -45,19 +59,27 @@ public abstract class JsonFile<T extends ICommonFileModel> extends BaseFile<T> {
                 jsonStr = jsonStr + linie;
             }
 
-            List<T> myFilesList = parseJSON(jsonStr);
-            myFilesList.forEach(file -> {
-                if (!myFiles.containsKey(file.getId())) {
-                    myFiles.put(file.getId(), file);
-                }
-            });
-
             br.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new DataFileException("label.error.data.unreadable");
         }
+
+        if (jsonStr.trim().isEmpty()) {
+            System.out.println(messages.get("label.error.data.empty") + ": " + getInputFileName());
+            return myFiles;
+        }
+
+        List<T> myFilesList = null;
+        try {
+            myFilesList = parseJSON(jsonStr);
+        } catch (JSONException e) {
+            throw new DataFileException("label.error.data.invalid-json");
+        }
+        myFilesList.forEach(file -> {
+            if (!myFiles.containsKey(file.getId())) {
+                myFiles.put(file.getId(), file);
+            }
+        });
 
         return myFiles;
     }
@@ -65,14 +87,14 @@ public abstract class JsonFile<T extends ICommonFileModel> extends BaseFile<T> {
     protected abstract List<T> parseJSON(String jsonStr);
 
     @Override
-    public void WriteFile(Collection<T> objectsToWrite) {
+    public void WriteFile(Collection<T> objectsToWrite) throws DataFileException {
         String jsonStr = toJSON(objectsToWrite);
-        BufferedWriter br = GetBufferedWriter();
         try {
+            BufferedWriter br = GetBufferedWriter();
             br.write(jsonStr);
             br.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new DataFileException("label.error.data.not-saved");
         }
     }
 

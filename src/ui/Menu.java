@@ -1,10 +1,13 @@
 package ui;
 
 import exceptions.DuplicateLocationException;
+import exceptions.DuplicateMediaFileException;
 import exceptions.InvalidFilterException;
 import exceptions.InvalidLocationException;
+import exceptions.InvalidMediaFileException;
 import exceptions.InvalidOptionException;
 import exceptions.LocationNotFoundException;
+import exceptions.MediaFileNotFoundException;
 import i18n.Messages;
 import model.files.locationModels.LocationModel;
 import model.files.locationModels.MyLocationsHolder;
@@ -38,6 +41,7 @@ public final class Menu {
     private static final int OPTION_DELETE_LOCATION = 3;
     private static final int OPTION_SHOW_FILES = 1;
     private static final int OPTION_FILTER_FILES = 2;
+    private static final int OPTION_MOVE_FILE = 3;
     private static final long KILOBYTE = 1024;
     private static final long MEGABYTE = KILOBYTE * 1024;
     private static final String INVALID_OPTION = "label.error.input.invalid-option";
@@ -143,7 +147,7 @@ public final class Menu {
         while (inFilesMenu) {
             printFilesMenu();
             try {
-                int option = readOption(OPTION_BACK, OPTION_FILTER_FILES);
+                int option = readOption(OPTION_BACK, OPTION_MOVE_FILE);
                 switch (option) {
                     case OPTION_SHOW_FILES:
                         showFiles();
@@ -151,13 +155,16 @@ public final class Menu {
                     case OPTION_FILTER_FILES:
                         filterFiles();
                         break;
+                    case OPTION_MOVE_FILE:
+                        moveFile();
+                        break;
                     case OPTION_BACK:
                         inFilesMenu = false;
                         break;
                 }
             } catch (NumberFormatException e) {
                 System.out.println(messages.get("label.error.input.not-a-number"));
-            } catch (InvalidOptionException | InvalidFilterException e) {
+            } catch (InvalidOptionException | InvalidFilterException | InvalidMediaFileException | MediaFileNotFoundException | InvalidLocationException | LocationNotFoundException | DuplicateMediaFileException e) {
                 System.out.println(messages.get(e.getMessage()));
             }
         }
@@ -168,6 +175,7 @@ public final class Menu {
         System.out.println(messages.get("label.menu.files.title"));
         System.out.println(OPTION_SHOW_FILES + ". " + messages.get("label.menu.show-files"));
         System.out.println(OPTION_FILTER_FILES + ". " + messages.get("label.menu.filter-files"));
+        System.out.println(OPTION_MOVE_FILE + ". " + messages.get("label.menu.move-file"));
         System.out.println(OPTION_BACK + ". " + messages.get("label.menu.back"));
         System.out.print(messages.get("label.menu.choose-option") + ": ");
     }
@@ -329,6 +337,42 @@ public final class Menu {
 
         int option = readOption(1, mediaTypes.length);
         return mediaTypes[option - 1];
+    }
+
+    private void moveFile() throws InvalidOptionException, InvalidMediaFileException, MediaFileNotFoundException, InvalidLocationException, LocationNotFoundException, DuplicateMediaFileException {
+        MyFilesHolder filesHolder = MyFilesHolder.GetInstance();
+        HashMap<Integer, MyFileModel> files = filesHolder.getFiles();
+        if (files == null || files.isEmpty()) {
+            System.out.println(messages.get("label.file.none"));
+            return;
+        }
+
+        System.out.print(messages.get("label.file.enter-name-or-id") + ": ");
+        List<MyFileModel> matches = filesHolder.findByNameOrId(scanner.nextLine().trim());
+        MyFileModel file = matches.size() == 1 ? matches.get(0) : chooseFile(matches);
+
+        System.out.print(messages.get("label.file.enter-destination") + ": ");
+        LocationModel location = MyLocationsHolder.GetInstance().findLocationByPath(scanner.nextLine().trim());
+        filesHolder.moveFile(file, location);
+
+        System.out.println(messages.get("label.file.moved"));
+        System.out.println(formatFile(file));
+    }
+
+    private MyFileModel chooseFile(List<MyFileModel> matches) throws InvalidOptionException {
+        System.out.println(messages.get("label.file.several-matches") + ":");
+        for (MyFileModel file : matches) {
+            System.out.println(INDENT + formatFile(file));
+        }
+        System.out.print(messages.get("label.file.enter-id") + ": ");
+
+        int id = Integer.parseInt(scanner.nextLine().trim());
+        for (MyFileModel file : matches) {
+            if (file.getId() == id) {
+                return file;
+            }
+        }
+        throw new InvalidOptionException(INVALID_OPTION);
     }
 
     private void showReport() {
