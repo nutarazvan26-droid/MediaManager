@@ -24,14 +24,13 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * This is my files holder singleton implementation for holding the single ref point to files_in.json,
+ * This is my files holder singleton implementation for holding the single ref point to files.json,
  * and it's also used to parse and return the file objects from the file.
  *
  * @author RazvanNuta
  * @version 2
  * @see JsonFile
  * @see MyFileModel
- * @since 2026.10.18
  */
 public final class MyFilesHolder extends JsonFile<MyFileModel> {
     private static final String FILES_LOCATION = "test-data-files\\files.json";
@@ -52,6 +51,17 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
         return instance;
     }
 
+    /**
+     * This method is used to parse the media files from files.json, after the locations were parsed from locations.json.
+     * The locations are needed to check that each media file belongs to a monitored location
+     * and that its path is the path of that location followed by its name.
+     *
+     * @param locationsMap The locations parsed from locations.json, by id
+     * @return The valid media files from files.json, by id
+     * @throws DataFileException In the case files.json cannot be read or it does not contain a valid JSON throws this exception.
+     * @see JsonFile#ParseFile()
+     * @see model.files.locationModels.MyLocationsHolder
+     */
     public HashMap<Integer, MyFileModel> ParseFile(HashMap<Integer, LocationModel> locationsMap) throws DataFileException {
         this.locationsMap = locationsMap;
         files = ParseFile();
@@ -168,6 +178,16 @@ public final class MyFilesHolder extends JsonFile<MyFileModel> {
         return largestFile;
     }
 
+    /**
+     * This method is used to parse the media files from the content of files.json and to validate each one of them.
+     * A media file with a missing or invalid field is ignored and a message is printed, for example when its id is duplicated,
+     * its location is not monitored, its extension is not supported or does not match its name and type, its size is negative,
+     * its date is not in the dd.MM.yyyy HH:mm format or its path is not the path of its location followed by its name.
+     *
+     * @param jsonStr The content of files.json
+     * @return The valid media files from files.json
+     * @see MediaType
+     */
     @Override
     protected List<MyFileModel> parseJSON(String jsonStr) {
         List<MyFileModel> myFileList = new ArrayList<>();

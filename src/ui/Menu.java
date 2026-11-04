@@ -29,6 +29,17 @@ import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * This is the console menu of the application, implemented as a singleton.
+ * The main menu leads to the submenus for the locations and the media files, to the report and to the language change,
+ * and after an action or an error the user remains in the same menu until "0" is chosen.
+ * All the texts are translated with Messages, in RO or EN.
+ *
+ * @author RazvanNuta
+ * @see Messages
+ * @see MyLocationsHolder
+ * @see MyFilesHolder
+ */
 public final class Menu {
     private static final int OPTION_EXIT = 0;
     private static final int OPTION_LOCATIONS = 1;
@@ -60,6 +71,11 @@ public final class Menu {
         return instance;
     }
 
+    /**
+     * This method is used to show the main menu and to run the chosen options, until the user chooses to exit.
+     * An invalid option is shown as a translated message and the menu is shown again.
+     * The menu also stops when there is nothing more to read from the console.
+     */
     public void start() {
         boolean running = true;
         while (running) {

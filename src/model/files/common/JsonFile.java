@@ -30,12 +30,14 @@ public abstract class JsonFile<T extends ICommonFileModel> extends BaseFile<T> {
     /**
      * This method is used to parse a generic json file that supports type of T as model,
      * and will parse to the type of T in the override method of parseJSON in each class that derives from this class.
+     * If the input file is missing or empty, a message is printed and the returned map is empty.
      *
-     * @return HashMap<Integer, T>, where T is the model of the object to be read from the input file.
-     * Because T extends CommonFile, it has access to the getId method from T.
+     * @return {@code HashMap<Integer, T>}, where T is the model of the object to be read from the input file.
+     * Because T extends ICommonFileModel, it has access to the getId method from T.
+     * @throws DataFileException In the case the input file cannot be read or it does not contain a valid JSON
+     * throws this exception.
      * @see model.files.mediaFiles.MyFilesHolder
      * @see model.files.locationModels.MyLocationsHolder
-     * @since 2026.19.10
      */
     @Override
     public HashMap<Integer, T> ParseFile() throws DataFileException {
@@ -86,6 +88,15 @@ public abstract class JsonFile<T extends ICommonFileModel> extends BaseFile<T> {
 
     protected abstract List<T> parseJSON(String jsonStr);
 
+    /**
+     * This method is used to write the objects in the output file, as JSON, using the override method of toJSON
+     * from each class that derives from this class. It is called when the application is closed.
+     * For the holders the output file is the same as the input file, so the next start reads the saved data.
+     *
+     * @param objectsToWrite The objects to be written in the output file
+     * @throws DataFileException In the case the output file cannot be written throws this exception.
+     * @see #ParseFile()
+     */
     @Override
     public void WriteFile(Collection<T> objectsToWrite) throws DataFileException {
         String jsonStr = toJSON(objectsToWrite);

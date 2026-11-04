@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * This is my locations holder singleton implementation for holding the single ref point to locations_in.json,
+ * This is my locations holder singleton implementation for holding the single ref point to locations.json,
  * and it's also used to parse and return the locations from the file.
  *
  * @author RazvanNuta
@@ -24,7 +24,6 @@ import java.util.List;
  * @see model.files.common.JsonFile
  * @see LocationModel
  * @see LocationType
- * @since 2026.10.18
  */
 public final class MyLocationsHolder extends JsonFile<LocationModel> {
     private static final String LOCATIONS_LOCATION = "test-data-files\\locations.json";
@@ -57,6 +56,14 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
         return locations;
     }
 
+    /**
+     * This method is used to find the root locations, the ones that are not a sub location of any other location.
+     * The locations are shown in the menu and saved in locations.json starting from these roots,
+     * with their sub locations inside them.
+     *
+     * @param allLocations All the locations, including the sub locations
+     * @return The locations that are not a sub location of another location
+     */
     public List<LocationModel> getRootLocations(Collection<LocationModel> allLocations) {
         List<LocationModel> subLocations = new ArrayList<>();
         for (LocationModel location : allLocations) {
@@ -72,6 +79,19 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
         return rootLocations;
     }
 
+    /**
+     * This method is used to validate the path of a new location, before the name of the location is read from the console.
+     * The path is normalized first ("/" becomes "\" and the "\" from the end is removed). Then it must have a valid format,
+     * starting with a drive (for example C:\), it must not be monitored already and, if it is not a drive,
+     * one of its parent folders must be monitored.
+     *
+     * @param path The path of the new location, as it was read from the console
+     * @return The normalized path, that will be the path of the new location
+     * @throws InvalidLocationException In the case the path is empty, has an invalid format
+     * or none of its parent folders is monitored throws this exception.
+     * @throws DuplicateLocationException In the case a location with the same path is already monitored throws this exception.
+     * @see #addLocation(String, String)
+     */
     public String validatePath(String path) throws InvalidLocationException, DuplicateLocationException {
         if (path.isEmpty()) {
             throw new InvalidLocationException("label.error.location.empty-path");
@@ -90,6 +110,19 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
         return normalizedPath;
     }
 
+    /**
+     * This method is used to add a new location created by the user, in memory, under its closest monitored parent folder
+     * (a drive is added as a root location). The locations that are already monitored inside the new path
+     * become sub locations of the new location, similar to a real desktop.
+     * The new location receives the biggest id + 1 and the USER_CREATED type.
+     *
+     * @param path The path of the new location, already validated and normalized by validatePath
+     * @param name The name of the new location
+     * @return The added location, with the sub locations that were moved under it
+     * @throws InvalidLocationException In the case the name is empty throws this exception.
+     * @see #validatePath(String)
+     * @see LocationType
+     */
     public LocationModel addLocation(String path, String name) throws InvalidLocationException {
         if (name.isEmpty()) {
             throw new InvalidLocationException("label.error.location.empty-name");
@@ -146,6 +179,14 @@ public final class MyLocationsHolder extends JsonFile<LocationModel> {
         return location;
     }
 
+    /**
+     * This method is used to delete a location from memory, together with all its sub locations.
+     * The returned ids are used after that to remove the media files of the deleted locations.
+     *
+     * @param location The location to be deleted, chosen by name or id from the menu
+     * @return The ids of the deleted location and of all its sub locations
+     * @see model.files.mediaFiles.MyFilesHolder#removeFilesOfLocations(List)
+     */
     public List<Integer> deleteLocation(LocationModel location) {
         for (LocationModel parent : locations.values()) {
             parent.getSubLocations().remove(location);

@@ -3,13 +3,12 @@ package model.files.common;
 import java.util.Objects;
 
 /**
- * This is the base file model class for both the locations holder and the in/out files holder
+ * This is the base file model class for both the locations holder and the files holder
  * It implements the base interface ICommonFileModel and Comparable
  *
  * @author RazvanNuta
  * @see java.lang.Comparable
  * @see model.files.common.ICommonFileModel
- * @since 2026.19.10
  */
 public abstract class CommonFileModel implements Comparable<CommonFileModel>, ICommonFileModel {
     private int id;
@@ -74,12 +73,14 @@ public abstract class CommonFileModel implements Comparable<CommonFileModel>, IC
     }
 
     /**
-     * Simple logic to sort files by file name, for other types of supported sorting, will implement different kinds of Comparators.
+     * Simple logic to sort files by file name, without making a difference between upper and lower case letters.
+     * For the other types of supported sorting there are different kinds of Comparators, in FileSortType.
      *
      * @param o the object to be compared.
-     * @return -1 if the first compared file is alphabetically smaller than the second based on the name
-     * @return 0 if the first compared file has the same name with the second file
-     * @return 1 if the first compared file is alphabetically bigger than the second based on the name
+     * @return A negative number if the first compared file is alphabetically smaller than the second based on the name,
+     * 0 if the first compared file has the same name with the second file
+     * and a positive number if the first compared file is alphabetically bigger than the second based on the name
+     * @see model.files.mediaFiles.FileSortType
      */
     @Override
     public int compareTo(CommonFileModel o) {

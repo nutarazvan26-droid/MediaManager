@@ -31,7 +31,8 @@ public abstract class BaseFile<T> implements IFileMethods<T> {
      * This method is used to read the input files and create an
      * output file pair if it doesn't exist on the disk yet.
      *
-     * @throws IOException
+     * @throws IOException In the case the input file does not exist (FileNotFoundException)
+     * or the output file cannot be created throws this exception.
      */
     @Override
     public void ReadFile() throws IOException {

@@ -8,12 +8,31 @@ import ui.Menu;
 
 import java.util.HashMap;
 
+/**
+ * This is the main class of the application, that loads the data from the files, starts the menu
+ * and saves the data back in the same files when the application is closed.
+ * The locations are parsed before the media files, because the media files are validated against them.
+ *
+ * @author RazvanNuta
+ * @see Menu
+ * @see MyLocationsHolder
+ * @see MyFilesHolder
+ */
 public class Main {
     private static final Messages messages = Messages.getInstance();
     private static HashMap<Integer, LocationModel> locationsMap;
     private static HashMap<Integer, MyFileModel> filesMap;
     private static boolean loaded;
 
+    /**
+     * This method is used to start the application.
+     * It adds the exit behaviour first, which saves the locations and the media files when the application is closed,
+     * then parses the files and shows the menu only if both files could be read.
+     * If a file is unreadable or does not contain a valid JSON, the application stops without saving anything,
+     * so the files are not overwritten.
+     *
+     * @param args The arguments from the command line, not used by the application
+     */
     public static void main(String[] args) {
         //Add exit behaviour
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
